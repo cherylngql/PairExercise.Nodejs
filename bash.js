@@ -1,13 +1,15 @@
-process.stdout.write('prompt> ');
+process.stdout.write('prompt > ');
 process.stdin.on('data', (data) => {
   const cmd = data.toString().trim(); //remove the new line
-  if(cmd === "pwd"){
-    process.stdout.write(process.cwd());
-    process.stdout.write('\nprompt> ');
-  }
-  else{
-    process.stdout.write('you typed: ' + cmd);
-    process.stdout.write('\nprompt> ');
+  if (cmd === "pwd"){
+    const pwd = module.require('./pwd.js');
+    pwd();
+  } else if (cmd === "ls") {
+    const ls = module.require('./ls.js');
+    ls();
+  } else {
+    process.stdout.write('You typed: ' + cmd);
+    process.stdout.write('\nprompt > ');
   }
 
 });
